@@ -1,8 +1,20 @@
 <div class="row">
-  <div class="col-md-5">
-    <app-recipe-list></app-recipe-list>
-  </div>
-  <div class="col-md-7">
-    <app-recipe-detail></app-recipe-detail>
-  </div>
+    <div class="col-md-5">
+        <app-recipe-list
+            (recipeWasSelected)="selectedRecipe = $event"
+        ></app-recipe-list>
+        <!--  selectedRecipe = $event above we pass data to selectedRecipe, could be a method in Ts file -->
+    </div>
+    <div class="col-md-7">
+        <app-recipe-detail
+            *ngIf="selectedRecipe; else infoText"
+            [recipe]="selectedRecipe"
+        ></app-recipe-detail>
+        <!-- #infoText -? local Reference
+        [recipe]="selectedRecipe" property binding
+        -->
+        <ng-template #infoText>
+            <h3>Please select a Recipe!</h3>
+        </ng-template>
+    </div>
 </div>
